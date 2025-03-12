@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  flask-app:
+    build:
+      context: ./main   # dockerfile path
+    container_name: flask_app
+    ports:
+      - "4242:5000"
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: "mongodb://mongo:27017/mydatabase"
+    restart: always
+
+  mongo:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - "27020:27017"
+    restart: always
